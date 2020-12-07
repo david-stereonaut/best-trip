@@ -2,4 +2,4 @@ const say = function(){
   return "yehuda ha melehhhhh"
 }
 
-say()
+console.log("blablablabla")
