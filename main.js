@@ -5,5 +5,3 @@ const say = function(){
 
 
 
-console.log("miao miao miao")
-
