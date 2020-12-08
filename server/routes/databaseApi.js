@@ -8,7 +8,15 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/best-trip")
 
 router.get('/getPlaces', function(req, res) {
     let places = await Place.find({})
-    let {__v, ...fixedPlaces} = places._doc
+    let myObject = {
+        key1: "key1",
+        key2: "key2",
+        key3: "key3"
+    }
+    let { key1 } = myObject
+    consolr.log(key1) //"key1"
+
+    let { __v, ...fixedPlaces } = places._doc
         res.send(fixedPlaces)
 })
 

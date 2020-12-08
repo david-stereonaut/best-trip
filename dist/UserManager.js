@@ -15,7 +15,7 @@ class UserManager {
   }
 
   async removeFromChecklist(place_id) {
-    let place = await $.ajax({
+    $.ajax({
       url: `/removePlace/${place_id}`,
       type: 'DELETE',
       success: function (results) {

@@ -69,6 +69,11 @@
             <img src="{{icon}}">
             <p>{{name}}</p>
             <p>{{rating}}</p>
+            {{#if isListed}}
+            <button class="remove-from-db" onclick="removeFromChecklist('{{place_id}}')"></button>
+            {{else}}
+            <button class="save-to-db" onclick="saveToChecklist('{{place_id}}')"></button>
+            {{/if}}
         </div>
         {{/each}}
     </script>
@@ -88,8 +93,13 @@
       <p>{{website}}</p>
       <br>
       <img src="{{icon}}">
+      {{#if isListed}}
+      <button class="remove-from-db" onclick="removeFromChecklist('{{place_id}}')"></button>
+      {{else}}
+      <button class="save-to-db" onclick="saveToChecklist('{{place_id}}')"></button>
+      {{/if}}
     </div>
-    </script>
+  </script>
 
   <script src="/jquery/dist/jquery.js"></script>
   <script src="/handlebars/dist/handlebars.js"></script>

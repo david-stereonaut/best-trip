@@ -1,13 +1,15 @@
+const { use } = require("../server/routes/externalApi")
+
 const placesManager = new PlacesManager()
 const flightsManager = new FlightsManager()
-// const userManager = new UserManager()
+const userManager = new UserManager()
 const renderer = new Renderer()
 
 /* on load actions */
-// userManager.getChecklists()
-//     .then(function(result) {
-//         renderer.renderFrontPage(result)
-//     })
+userManager.getChecklists()
+    .then(function(result) {
+        renderer.renderFrontPage(result)
+    })
 
 let userLocation = {}
 let currentCity
@@ -47,24 +49,32 @@ const search = async () => {
     }
 }
 
+const checkIfListed = function(place_id, savedPlaces) {
+    savedPlaces.includes({ place_id })
+}
+
 const searchPlaces = async (category) => {
     currentCategory = category
     console.log(category)
     let results = await placesManager.getPlaces(currentCity, category)
-    renderer.renderMoreResults(results)
+    let formattedResults = results.map(r => ({
+        ...r,
+        isListed: checkIfListed(results.place_id, userManager.places)
+    }))
+    renderer.renderMoreResults(formattedResults)
 }
 
-// const saveToChecklist = (name) => {
-//     userManager.saveToChecklist(name, currentCategory)
-// }
+const saveToChecklist = (place_id) => {
+    userManager.saveToChecklist(place_id)
+}
 
-// const removeFromChecklist = (name) => {
-//     userManager.removeFromChecklist(name)
-// }
+const removeFromChecklist = (place_id) => {
+    userManager.removeFromChecklist(place_id)
+}
 
 const seePlace = async (placeid) => {
     let place = await placesManager.getPlace(placeid)
-    renderer.renderPlace(place)
+    renderer.renderPlace({ ...place, isListed: checkIfListed(results.place_id, userManager.places) })
 }
 
 const seeChecklist = () => {
