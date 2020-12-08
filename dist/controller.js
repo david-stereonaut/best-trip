@@ -62,6 +62,11 @@ const searchPlaces = async (category) => {
 //     userManager.removeFromChecklist(name)
 // }
 
+const seePlace = async (placeid) => {
+    let place = await placesManager.getPlace(placeid)
+    renderer.renderPlace(place)
+}
+
 const seeChecklist = () => {
     renderer.renderChecklist(userManager.checklist)
 }

@@ -38,4 +38,12 @@ class Renderer {
         const categoryHtml = template(results)
         $('.results-container').append(categoryHtml)
     }
+
+    renderPlace(place){
+    $('.results-container').empty()
+    const source = $('#place-template').html()
+    const template = Handlebars.compile(source)
+    const placeHtml = template(place)
+    $('.results-container').append(placeHtml)
+    }
 }
