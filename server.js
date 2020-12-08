@@ -1,8 +1,8 @@
 const express = require('express')
 const app = express()
 const path = require('path')
-const databaseApi = require('./server/routes/databaseApi')
-const externalApi = require('./server/routes/externalApi')
+// const databaseApi = require('./server/routes/databaseApi')
+// const externalApi = require('./server/routes/externalApi')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
