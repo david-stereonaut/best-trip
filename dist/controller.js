@@ -1,13 +1,13 @@
 const placesManager = new PlacesManager()
 const flightsManager = new FlightsManager()
-const userManager = new UserManager()
+// const userManager = new UserManager()
 const renderer = new Renderer()
 
 /* on load actions */
-userManager.getChecklists()
-    .then(function(result) {
-        renderer.renderFrontPage(result)
-    })
+// userManager.getChecklists()
+//     .then(function(result) {
+//         renderer.renderFrontPage(result)
+//     })
 
 let userLocation = {}
 let currentCity
@@ -20,7 +20,7 @@ if (navigator.geolocation) {
     userLocation = undefined
 }
 
-initialize = function () {
+function initialize () {
     let options = {
         types: ['(cities)']
     }
@@ -56,13 +56,13 @@ const searchPlaces = async (category) => {
     renderer.renderCategoryResults(results)
 }
 
-const saveToChecklist = (name) => {
-    userManager.saveToChecklist(name, currentCategory)
-}
+// const saveToChecklist = (name) => {
+//     userManager.saveToChecklist(name, currentCategory)
+// }
 
-const removeFromChecklist = (name) => {
-    userManager.removeFromChecklist(name)
-}
+// const removeFromChecklist = (name) => {
+//     userManager.removeFromChecklist(name)
+// }
 
 const seeChecklist = () => {
     renderer.renderChecklist(userManager.checklist)
