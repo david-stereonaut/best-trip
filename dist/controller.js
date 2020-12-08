@@ -25,26 +25,29 @@ const initialize = () => {
         types: ['(cities)']
     }
     
-    let fromInput = document.getElementById('fly-from')
-    let toInput = document.getElementById('fly-to')
+    let fromInput = document.getElementById('from-input')
+    let toInput = document.getElementById('to-input')
 
     new google.maps.places.Autocomplete(fromInput, options)
     new google.maps.places.Autocomplete(toInput, options)
 }
 
 const search = async () => {
-    let flyFrom = ($(".fly-from").val()).split(',')[0] || ''
-    let flyTo = ($(".fly-to").val()).split(',')[0]
-
-    let dateStart = moment($(".date-start").val()).format('DD/MM/YYYY')
-    let dateEnd = moment($(".date-end").val()).format('DD/MM/YYYY')
-    let flights
-    if (userLocation && flyFrom === ''){
-        flights = await flightsManager.getFlights(flyFrom, flyTo, userLocation.lat, userLocation.lon, dateStart, dateEnd)
+    let flyFrom = ($("#from-input").val()).split(',')[0] || ''
+    let flyTo = ($("#to-input").val()).split(',')[0] || ''
+    if(flyTo === '') {
+        console.log('you gotta fly somewhere')
     } else {
-        flights = await flightsManager.getFlights(flyFrom, flyTo, 0, 0, dateStart, dateEnd)
+        let dateStart = moment($(".date-start").val()).format('DD/MM/YYYY')
+        let dateEnd = moment($(".date-end").val()).format('DD/MM/YYYY')
+        let flights
+        if (userLocation && flyFrom === ''){
+            flights = await flightsManager.getFlights(flyFrom, flyTo, userLocation.lat, userLocation.lon, dateStart, dateEnd)
+        } else {
+            flights = await flightsManager.getFlights(flyFrom, flyTo, 0, 0, dateStart, dateEnd)
+        }
+        renderer.renderMainResults(flights)
     }
-    renderer.renderMainResults(flights)
 }
 
 const searchPlaces = async (category) => {
