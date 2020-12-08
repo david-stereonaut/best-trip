@@ -10,24 +10,24 @@ const GOOGLE_API = process.env.GOOGLE_API
 
 router.post('/flights', async function (req, res) {
     const flight = req.body
-    let airportFrom = await axios.get(`https://www.air-port-codes.com/api/v1/multi?type=a&term=${flight.flightFrom}`, {
+    let airportFrom = await axios.get(`https://www.air-port-codes.com/api/v1/multi?type=a&term=${flight.flyFrom}`, {
         headers: {
             'APC-Auth': '6f4fb09668', 'APC-Auth-Secret': 'fb132f8cb880647'
         }
     })
-    airportFrom = airportFrom.data.airports[0].iata
+    airportFrom = airportFrom.data.airports[0].iata || airportFrom.data.airports.iata
 
-    let airportTo = await axios.get(`https://www.air-port-codes.com/api/v1/multi?type=a&term=${flight.flightTo}`, {
+    let airportTo = await axios.get(`https://www.air-port-codes.com/api/v1/multi?type=a&term=${flight.flyTo}`, {
         headers: {
             'APC-Auth': '6f4fb09668', 'APC-Auth-Secret': 'fb132f8cb880647'
         }
     })
-    airportTo = airportTo.data.airports[0].iata
+    airportTo = airportTo.data.airports[0].iata || airportFrom.data.airports.iata
 
-    let flightsData = await axios.get(`https://api.skypicker.com/flights?flyFrom=${airportFrom}&to=${airportTo}&dateFrom=${flight.dateFrom}&dateTo=${flight.dateTo}&partner=picky&v=3`)
+    let flightsData = await axios.get(`https://api.skypicker.com/flights?flyFrom=${airportFrom}&to=${airportTo}&dateFrom=${flight.dateStart}&dateTo=${flight.dateEnd}&partner=picky&v=3`)
     let fly = flightsData.data.data
-    let flightsArray = fly.map(f => [
-        {
+    let flightsArray = fly.map(f => 
+        ({
             dtime: f.dTime,
             aTime: f.aTime,
             cityFrom: f.cityFrom,
@@ -41,7 +41,7 @@ router.post('/flights', async function (req, res) {
             link: f.deep_link,
             transfers: f.transfers,
             fly_duration: f.fly_duration
-        }])
+        }))
     res.send(flightsArray)
 })
 
@@ -53,14 +53,14 @@ router.post('/flights', async function (req, res) {
         let location = makeCitytoLatandLong.data.results[0].geometry.location
         const getPlaces = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.lat},${location.lng}&radius=5000&type=${category}&key=AIzaSyBZbfnMyK4xaIDNevsXwulDnxC9nhZ0rS0`)
         const results = getPlaces.data.results
-        const places = results.map(r => [{
+        const places = results.filter(r => (!(r.types.includes('lodging')))).map(r => ({
             name:r.name,
             icon:r.icon,
             types:r.types,
             business_status:r.business_status||null,
             rating:r.rating || null,
 
-        }])
+        }))
 
         res.send(places)
 

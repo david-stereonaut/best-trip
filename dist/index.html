@@ -9,55 +9,68 @@
     <title>BEST TRIP ORGANIZER</title>
 </head>
 <body>
-    <h1 class="center-align">YOUR BEST TRIP ORGANIZER</h1>
-    <h3 class="center-align">Fly Your Mind...</h3>
-
-    <div class="search-container">
-      <input id="from-input"  type="text" placeholder="Where From?">
-      <input id="to-input"  type="text" placeholder="Where To?">
-      <p>Departure</p> <input id="DateStart"  type="date">
-      <p>Return</p> <input id="DateEnd"  type="date">
-      <button>Search</button>
-    </div>
 
     <div class="container">
-      <div class="flights-container"></div>
-      <div class="results-container"></div>
-      <div class="results-category-container"></div>
     </div>
 
+    <script id="main-page-template" type="text/x-handlebars-template">
+        <h1 class="center-align">YOUR BEST TRIP ORGANIZER</h1>
+        <h3 class="center-align">Fly Your Mind...</h3>
+        <div class="search-container">
+            <input id="from-input"  type="text" placeholder="Where From?">
+            <input id="to-input"  type="text" placeholder="Where To?">
+            <p>Departure</p> <input id="date-start"  type="date">
+            <p>Return</p> <input id="date-end"  type="date">
+            <button onclick="search()">Search</button>
+        </div>
+    </script>
+
     <script id="flights-template" type="text/x-handlebars-template">
-      <div class="flights-info">
-      <p>FROM:</p> 
-        <p>{{flyFrom}}</p>
-        <br>
-        <p>TO:</p>
-        <p>{{flyTo}}</p>
-        <br>
-        <p>{{DateStart}}</p> - <p>{{DateEnd}}</p>
-      </div>
+          {{#each this}}
+          <div id="flight-card">
+            <p>FROM:</p>
+            <p>{{cityFrom}}, {{countryFrom}}</p>
+            <br>
+            <p>TO:</p>
+            <p>{{cityTo}}, {{countryTo}}</p>
+            <br>
+            <p>DEPARTURE:</p>
+            <p>{{dTime}}</p>
+            <br>
+            <p>ARRIVAL:</p>
+            <p>{{aTime}}</p>
+          </div>
+          {{/each}}
     </script>
 
     <script id="results-template" type="text/x-handlebars-template">
-      <div class="results-category">
-        <div class="resturants">
-          <p>{{parkResults}}</p>
+        <div class="restaurants"  onclick="searchPlaces('resturant')">
+          <p>Resturants</p>
         </div>
 
-        <div class="night-life">
-          <p>{{nightlifeResults}}</p>
+        <div class="nightlife" onclick="searchPlaces('night_club')">
+          <p>NightLife</p>
         </div>
 
-        <div class="museums">
-          <p>{{museumResults}}</p>
+        <div class="museums" onclick="searchPlaces('museum')">
+          <p>Museums</p>
         </div>
 
-        <div class="parks">
-          <p>{{parkResults}}</p>
+        <div class="parks" onclick="searchPlaces('park')">
+          <p>Parks</p>
         </div>
-      </div>
-
     </script>
+
+    <script id="more-results-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="result-card">
+            <img src="{{icon}}">
+            <p>{{name}}</p>
+            <p>{{rating}}</p>
+        </div>
+        {{/each}}
+    </script>
+
     <script src="/jquery/dist/jquery.js"></script>
     <script src="/handlebars/dist/handlebars.js"></script>
     <script defer
