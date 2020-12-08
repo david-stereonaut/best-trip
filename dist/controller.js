@@ -1,15 +1,13 @@
-const { use } = require("../server/routes/externalApi")
-
 const placesManager = new PlacesManager()
 const flightsManager = new FlightsManager()
 const userManager = new UserManager()
 const renderer = new Renderer()
 
 /* on load actions */
-userManager.getChecklists()
-    .then(function(result) {
-        renderer.renderFrontPage(result)
-    })
+userManager.getPlaces()
+    // .then(function(result) {
+    //     renderer.renderFrontPage(result)
+    // })
 
 let userLocation = {}
 let currentCity
@@ -72,9 +70,9 @@ const removeFromChecklist = (place_id) => {
     userManager.removeFromChecklist(place_id)
 }
 
-const seePlace = async (placeid) => {
-    let place = await placesManager.getPlace(placeid)
-    renderer.renderPlace({ ...place, isListed: checkIfListed(results.place_id, userManager.places) })
+const seePlace = async (place_id) => {
+    let place = await placesManager.getPlace(place_id)
+    renderer.renderPlace({ ...place, isListed: checkIfListed(place_id, userManager.places) })
 }
 
 const seeChecklist = () => {

@@ -6,22 +6,19 @@ const Place = require('../models/PlaceModel')
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/best-trip")
 
-router.get('/getPlaces', function(req, res) {
+router.get('/getPlaces', async function(req, res) {
     let places = await Place.find({})
-    let myObject = {
-        key1: "key1",
-        key2: "key2",
-        key3: "key3"
-    }
-    let { key1 } = myObject
-    consolr.log(key1) //"key1"
-
-    let { __v, ...fixedPlaces } = places._doc
-        res.send(fixedPlaces)
+    let formattedPlaces = places.map(p => {
+        let { __v, ...fixedPlaces } = p._doc
+        return {
+            fixedPlaces
+        }
+    })
+    res.send(formattedPlaces)
 })
 
-router.post('/savePlace', function(req, res) {
-    let place_id = req.body.place_id
+router.post('/savePlace/:place_id', async function(req, res) {
+    let place_id = req.params.place_id
     const getPlace = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyBZbfnMyK4xaIDNevsXwulDnxC9nhZ0rS0&place_id=${place_id}&langauge=en`)
     const result = getPlace.data.result
     const place = {
@@ -52,3 +49,5 @@ router.delete('removePlace', function(req, res) {
         res.send("deleted")
     )
 })
+
+module.exports = router

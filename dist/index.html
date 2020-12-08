@@ -70,9 +70,9 @@
             <p>{{name}}</p>
             <p>{{rating}}</p>
             {{#if isListed}}
-            <button class="remove-from-db" onclick="removeFromChecklist('{{place_id}}')"></button>
+            <button class="remove-from-db" onclick="removeFromChecklist('{{place_id}}')">remove</button>
             {{else}}
-            <button class="save-to-db" onclick="saveToChecklist('{{place_id}}')"></button>
+            <button class="save-to-db" onclick="saveToChecklist('{{place_id}}')">save</button>
             {{/if}}
         </div>
         {{/each}}
@@ -94,9 +94,9 @@
       <br>
       <img src="{{icon}}">
       {{#if isListed}}
-      <button class="remove-from-db" onclick="removeFromChecklist('{{place_id}}')"></button>
+      <button class="remove-from-db" onclick="removeFromChecklist('{{place_id}}')">remove</button>
       {{else}}
-      <button class="save-to-db" onclick="saveToChecklist('{{place_id}}')"></button>
+      <button class="save-to-db" onclick="saveToChecklist('{{place_id}}')">save</button>
       {{/if}}
     </div>
   </script>

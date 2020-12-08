@@ -1,5 +1,4 @@
 const express = require('express')
-const { get } = require('jquery')
 const router = express.Router()
 const axios = require('axios').default
 // const mongoose = require('mongoose')
