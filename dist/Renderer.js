@@ -17,7 +17,7 @@ class Renderer {
     const resultsHtml = template(results)
     $('.results-container').append(resultsHtml)
   }
-  
+
   renderCategoryResults(currentResults) {
     $('.results-category-container').empty()
     const source = $('#results-template').html()
