@@ -26,7 +26,7 @@ router.post('/flights', async function (req, res) {
 
     let flightsData = await axios.get(`https://api.skypicker.com/flights?flyFrom=${airportFrom}&to=${airportTo}&dateFrom=${flight.dateStart}&dateTo=${flight.dateEnd}&partner=picky&v=3`)
     let fly = flightsData.data.data
-    let flightsArray = fly.map(f => 
+    let flightsArray = fly.map(f =>
         ({
             dtime: f.dTime,
             aTime: f.aTime,
@@ -46,25 +46,48 @@ router.post('/flights', async function (req, res) {
 })
 
 
-    router.get('/places/:city/:category',async function(req,res){
-        const cityName = req.params.city
-        const category = req.params.category
-        const makeCitytoLatandLong = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${cityName}&key=AIzaSyBZbfnMyK4xaIDNevsXwulDnxC9nhZ0rS0`)
-        let location = makeCitytoLatandLong.data.results[0].geometry.location
-        const getPlaces = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.lat},${location.lng}&radius=5000&type=${category}&key=AIzaSyBZbfnMyK4xaIDNevsXwulDnxC9nhZ0rS0`)
-        const results = getPlaces.data.results
-        const places = results.filter(r => (!(r.types.includes('lodging')))).map(r => ({
-            name:r.name,
-            icon:r.icon,
-            types:r.types,
-            business_status:r.business_status||null,
-            rating:r.rating || null,
-            place_id:r.place_id,
-        }))
+router.get('/places/:city/:category', async function (req, res) {
+    const cityName = req.params.city
+    const category = req.params.category
+    const makeCitytoLatandLong = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${cityName}&key=AIzaSyBZbfnMyK4xaIDNevsXwulDnxC9nhZ0rS0`)
+    let location = makeCitytoLatandLong.data.results[0].geometry.location
+    const getPlaces = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.lat},${location.lng}&radius=5000&type=${category}&key=AIzaSyBZbfnMyK4xaIDNevsXwulDnxC9nhZ0rS0`)
+    const results = getPlaces.data.results
+    const places = results.filter(r => (!(r.types.includes('lodging')))).map(r => ({
+        name: r.name,
+        icon: r.icon,
+        types: r.types,
+        business_status: r.business_status || null,
+        rating: r.rating || null,
+        place_id:r.place_id,
+        photos:r.photos
+    res.send(places)
+})
+router.get('/place/:placeID', async function (req, res) {
+    const placeid = req.params.placeID
+    const getPlace = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyBZbfnMyK4xaIDNevsXwulDnxC9nhZ0rS0&place_id=${placeid}&langauge=en`)
+    const results = getPlace.data.result
+    const place = 
+    {
+        name:results.name,
+        status:results.business_status,
+        address:results.formatted_address,
+        internationalPhone:results.international_phone_number,
+        photos:results.photos,
+        rating:results.rating,
+        reviews:results.reviews,
+        geometry:results.geometry,
+        icon:results.icon,
+        place_id:results.place_id,
+        website:results.website,
+        opening_hours:results.opening_hours||null,
+        googleurl:results.url,
+        types:results.types,
+        vicinity:results.vicinity
+    }
+    res.send(place)
+})
 
-        res.send(places)
-
-    })
 
 
 module.exports = router
