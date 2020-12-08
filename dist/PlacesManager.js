@@ -1,23 +1,17 @@
 class PlacesManager {
     constructor() {
-        this.results = {
-            resturantResults = [],
-            parkResults = [],
-            nightlifeResults = [],
-            museumResults = []
-        }
-        this.currentResults = {}
+        this.results = []
     }
 
     async getPlaces(searchString, category) {
-        let places = await $.get(`/places/${searchString}/${category}`)
-        this.results = places.results
+        let places = await $.get(`/places/${searchString}/${category}`, {})
+        this.results = places
         return this.results
     }
 
     async getPlace(place_id) {
         let placeDetails = await $.get(`/place/${place_id}`)
-        this.currentResults = placeDetails
-        return this.currentResults
+        this.results = placeDetails
+        return this.results
     }
 }
