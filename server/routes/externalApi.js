@@ -59,7 +59,7 @@ router.post('/flights', async function (req, res) {
             types:r.types,
             business_status:r.business_status||null,
             rating:r.rating || null,
-
+            place_id:r.place_id,
         }))
 
         res.send(places)
