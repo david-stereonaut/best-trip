@@ -61,8 +61,6 @@ router.get('/places/:city/:category', async function (req, res) {
         rating: r.rating || null,
         place_id:r.place_id,
         photos:r.photos
-
-    }))
     res.send(places)
 })
 router.get('/place/:placeID', async function (req, res) {
