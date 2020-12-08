@@ -1,4 +1,4 @@
-const placesManager = new PlaceManager()
+const placesManager = new PlacesManager()
 const flightsManager = new FlightsManager()
 const userManager = new UserManager()
 const renderer = new Renderer()
@@ -20,7 +20,7 @@ if (navigator.geolocation) {
     userLocation = undefined
 }
 
-const initialize = () => {
+initialize = function () {
     let options = {
         types: ['(cities)']
     }

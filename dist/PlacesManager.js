@@ -1,10 +1,10 @@
 class PlacesManager {
     constructor() {
         this.results = {
-            resturantResults = [],
-            parkResults = [],
-            nightlifeResults = [],
-            museumResults = []
+            resturantResults: [],
+            parkResults: [],
+            nightlifeResults: [],
+            museumResults: []
         }
         this.currentResults = {}
     }
