@@ -48,7 +48,7 @@ const search = async () => {
 }
 
 const checkIfListed = function(place_id, savedPlaces) {
-    savedPlaces.includes({ place_id })
+    return savedPlaces.some(p => p.place_id === place_id )
 }
 
 const searchPlaces = async (category) => {
@@ -57,23 +57,33 @@ const searchPlaces = async (category) => {
     let results = await placesManager.getPlaces(currentCity, category)
     let formattedResults = results.map(r => ({
         ...r,
-        isListed: checkIfListed(results.place_id, userManager.places)
+        isListed: checkIfListed(r.place_id, userManager.places)
     }))
+    console.log(formattedResults)
     renderer.renderMoreResults(formattedResults)
 }
 
-const saveToChecklist = (place_id) => {
+$('.container').on('click', 'button.save-to-db', async function ()  {
+    let place_id = $(this).closest("div").data('id')
     userManager.saveToChecklist(place_id)
-}
+    $(this).removeAttr("class")
+    $(this).attr("class", "remove-from-db")
+    $(this).html('remove')
+})
 
-const removeFromChecklist = (place_id) => {
+$('.container').on('click', 'button.remove-from-db', async function () {
+    let place_id = $(this).closest("div").data('id')
     userManager.removeFromChecklist(place_id)
-}
+    $(this).removeAttr("class")
+    $(this).attr("class", "save-to-db")
+    $(this).html('save')
+})
 
-const seePlace = async (place_id) => {
-    let place = await placesManager.getPlace(place_id)
-    renderer.renderPlace({ ...place, isListed: checkIfListed(place_id, userManager.places) })
-}
+$('.container').on('click', 'p.result-name', async function() {
+        let place_id = $(this).closest("div").data('id')
+        let place = await placesManager.getPlace(place_id)
+        renderer.renderPlace({ ...place, isListed: checkIfListed(place_id, userManager.places) })
+})
 
 const seeChecklist = () => {
     renderer.renderChecklist(userManager.checklist)

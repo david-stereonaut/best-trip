@@ -10,9 +10,7 @@ router.get('/getPlaces', async function(req, res) {
     let places = await Place.find({})
     let formattedPlaces = places.map(p => {
         let { __v, ...fixedPlaces } = p._doc
-        return {
-            fixedPlaces
-        }
+        return { ...fixedPlaces }
     })
     res.send(formattedPlaces)
 })
@@ -43,10 +41,10 @@ router.post('/savePlace/:place_id', async function(req, res) {
     })
 })
 
-router.delete('removePlace', function(req, res) {
-    let place_id = req.body.place_id
-    City.findOneAndDelete({ place_id }).then(
-        res.send("deleted")
+router.delete('/removePlace/:place_id', function(req, res) {
+    let place_id = req.params.place_id
+    Place.findOneAndDelete({ place_id }).then(
+        res.send({success: "deleted"})
     )
 })
 
