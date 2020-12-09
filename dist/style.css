@@ -16,6 +16,7 @@ cursor: pointer;
 .container{
   display: grid;
   grid-template-columns: 1fr 3fr ;
+  margin: 10px 10px;
 
 }
 .search-container{
@@ -27,9 +28,29 @@ cursor: pointer;
   width: 50vw;
   align-content: center;
 }
-.flights-container , .results-container , #flight-card , #place-card{
+.flights-container , #flight-card , #place-card{
     display: grid;
     justify-content: center; 
+    background-color: #ecf0f1;
+    height:500px;
+		width:300px;
+    overflow-y:auto
+}
+
+.results-container{
+  display: grid;
+  justify-content: center; 
+  background-color: #ecf0f1;
+  height:800px;
+  width:400px;
+  overflow-y:auto
+}
+.form{
+  background-color: #ecf0f1;
+
+}
+:placeholder-shown{
+  color: black;
 }
 
 .restaurants , .nightlife , .museums , .parks , .result-card{
@@ -44,6 +65,8 @@ h1{
   font-family: 'Sue Ellen Francisco', cursive;
 }
 
-/* body{
+body{
   background-image: url("https://previews.123rf.com/images/9dreamstudio/9dreamstudio1909/9dreamstudio190901835/130269106-traveling-background-with-tourist-accessories-on-green-wooden-table-top-view-copy-space-frame.jpg"); 
-} */
+  background-repeat: no-repeat;
+  background-size: cover;
+} 
