@@ -55,4 +55,13 @@ class Renderer {
         const waitHtml = template()
         $('.container').append(waitHtml)
     }
+
+    renderChecklist(checklist) {
+        $('.search-container').empty()
+        $(".container").empty()
+        const source = $('#checklist-template').html()
+        const template = Handlebars.compile(source)
+        const checklistHtml = template(checklist)
+        $('.container').append(checklistHtml)
+    }
 }

@@ -72,7 +72,8 @@ $('.container').on('click', 'button.save-to-db', async function ()  {
     $(this).html('remove')
 })
 
-$('.container').on('click', 'button.remove-from-db', async function () {
+$('.container').on('click', 'button.remove-from-db', function () {
+    console.log('boom')
     let place_id = $(this).closest("div").data('id')
     userManager.removeFromChecklist(place_id)
     $(this).removeAttr("class")
@@ -84,6 +85,17 @@ $('.container').on('click', 'p.result-name', async function() {
         let place_id = $(this).closest("div").data('id')
         let place = await placesManager.getPlace(place_id)
         renderer.renderPlace({ ...place, isListed: checkIfListed(place_id, userManager.places) })
+})
+
+$('#comeHome').on('click',function(){
+    $(".container").empty()
+    $(".search-container").empty()
+    initialize()
+    renderer.renderMainPage()
+})
+
+$('#showChecklist').on('click', function(){
+    renderer.renderChecklist(userManager.places)
 })
 
 const seeChecklist = () => {

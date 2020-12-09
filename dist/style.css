@@ -1,6 +1,22 @@
+#panel{
+  display: list-item;
+  height: 40px;
+  background-color: rgb(191, 191, 235);
+}
+#comeHome{
+  margin: 15px 10px ;
+  cursor: pointer;
+}
+#showChecklist{
+margin: 15px 30px;
+cursor: pointer;
+
+}
+
 .container{
   display: grid;
   grid-template-columns: 1fr 3fr ;
+
 }
 .search-container{
   display: grid;

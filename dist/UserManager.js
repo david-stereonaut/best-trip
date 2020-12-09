@@ -3,6 +3,7 @@ class UserManager {
     this.places = []
   }
 
+
   async getPlaces() {
     let placesChecklist = await $.get('/getPlaces/')
     this.places = placesChecklist
