@@ -53,7 +53,7 @@ router.get('/places/:city/:category', async function (req, res) {
     let location = makeCitytoLatandLong.data.results[0].geometry.location
     const getPlaces = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.lat},${location.lng}&radius=5000&type=${category}&key=AIzaSyBZbfnMyK4xaIDNevsXwulDnxC9nhZ0rS0`)
     const results = getPlaces.data.results
-    const places = results.filter(r => (!(r.types.includes('lodging')))).map(r => ({
+    const places = results.filter(r => (!(r.types.includes('lodging')) & (!(r.types.includes('locality'))))).map(r => ({
         name: r.name,
         icon: r.icon,
         types: r.types,

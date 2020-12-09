@@ -31,22 +31,23 @@
           {{#each this}}
           <div id="flight-card">
             <p>FROM:</p>
-            <p>{{cityFrom}}, {{countryFrom}}</p>
-            <br>
+            <p>{{cityFrom}}, {{countryFrom}}, {{airportFromCod}}</p>
             <p>TO:</p>
-            <p>{{cityTo}}, {{countryTo}}</p>
-            <br>
+            <p>{{cityTo}}, {{countryTo}}, {{airportToCod}}</p>
+            <p>duration: {{fly_duration}}</p>
             <p>DEPARTURE:</p>
             <p>{{dTime}}</p>
-            <br>
             <p>ARRIVAL:</p>
             <p>{{aTime}}</p>
+            <P>price: {{price}}</P>
+            <p>availability seats: {{availability}}</p>
+            <a href="{{link}}">Book flight</a>
           </div>
           {{/each}}
     </script>
 
   <script id="results-template" type="text/x-handlebars-template">
-        <div class="restaurants"  onclick="searchPlaces('resturant')">
+        <div class="restaurants"  onclick="searchPlaces('cafe')">
           <p>Resturants</p>
         </div>
 
@@ -65,29 +66,49 @@
 
   <script id="more-results-template" type="text/x-handlebars-template">
         {{#each this}}
-  <div class="result-card" onclick="seePlace('{{place_id}}')">
+  <div class="result-card">
             <img src="{{icon}}">
-            <p>{{name}}</p>
-            <p>{{rating}}</p>
+            <p onclick="seePlace('{{place_id}}')">{{name}}</p>
+            <p>rating: {{rating}}</p>
+            {{#if opening_hours.open_now}}
+            <p>open now!</p>
+            {{/if}}
+            <p>types:</p>
+            <ul>
+            {{#each types}}
+              <li>{{this}}</li>
+              {{/each}}
+            </ul>
+            {{#each photos}}
+            <img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=150&photoreference={{photo_reference}}&key=AIzaSyBZbfnMyK4xaIDNevsXwulDnxC9nhZ0rS0" alt="pic">
+            {{/each}}
         </div>
         {{/each}}
     </script>
 
   <script id="place-template" type="text/x-handlebars-template">
     <div class="place-card">
-      <p>name :{{name}}</p>
-      <br>
-      <p>{{address}}</p>
-      <br>
-      <p>{{status}}</p>
-      <br>
-      <p>{{internationalPhone}}</p>
-      <br>
-      <p>{{rating}}</p>
-      <br>
-      <p>{{website}}</p>
-      <br>
       <img src="{{icon}}">
+      <p>{{name}}</p>
+      <p>address: {{address}}</p>
+      <p>status: {{status}}</p>
+      <p>phone: {{internationalPhone}}</p>
+      <p>rating: {{rating}}</p>
+      <a href="{{website}}">place website</a>
+      {{#each photos}}
+      <img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&photoreference={{photo_reference}}&key=AIzaSyBZbfnMyK4xaIDNevsXwulDnxC9nhZ0rS0">
+      {{/each}}
+      <br>
+      <p>reviews:</p>
+      {{#each reviews}}
+      <div class="review-card">
+      <img src="{{profile_photo_url}}">
+        <p>name: {{author_name}}</p>
+        <p>rating: {{rating}}</p>
+        <p>text: {{text}}</p>
+        <p>rtime description: {{relative_time_description}}</p>
+      </div>
+      {{/each}}
     </div>
     </script>
 
