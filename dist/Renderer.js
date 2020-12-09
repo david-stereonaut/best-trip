@@ -4,7 +4,7 @@ class Renderer {
         const source = $('#main-page-template').html()
         const template = Handlebars.compile(source)
         const mainHtml = template()
-        $('.container').append(mainHtml)
+        $('.search-container').append(mainHtml)
     }
 
     renderFlights(flights) {
@@ -25,6 +25,7 @@ class Renderer {
 
     renderMainResults(flights) {
         $(".container").empty()
+        $(".search-container").empty()
         $(".container").append('<div class="flights-container"></div>')
         $(".container").append('<div class="results-container"></div>')
         this.renderFlights(flights)
