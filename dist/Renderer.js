@@ -54,6 +54,7 @@ class Renderer {
 
     renderWaiting(){
         $(".container").empty()
+        $(".search-container").empty()
         const source = $('#waiting-template').html()
         const template = Handlebars.compile(source)
         const waitHtml = template()
@@ -75,6 +76,6 @@ class Renderer {
         const source = $('#checklist-template').html()
         const template = Handlebars.compile(source)
         const checklistHtml = template(checklist)
-        $('.container').append(checklistHtml)
+        $('.search-container').append(checklistHtml)
     }
 }
