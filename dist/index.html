@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link type="text/css" rel="stylesheet" href="/materialize-css/dist/css/materialize.css" media="screen,projection" />
+
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Merienda&family=Sue+Ellen+Francisco&display=swap" rel="stylesheet">
   <title>BEST TRIP ORGANIZER</title>
 </head>
 
@@ -19,28 +23,21 @@
         <h1 class="center-align">YOUR BEST TRIP ORGANIZER</h1>
         <h3 class="center-align">Fly Your Mind...</h3>
         <div class="search-container">
-            <input id="from-input"  type="text" placeholder="Where From?">
-            <input id="to-input"  type="text" placeholder="Where To?">
-            <p>Departure</p> <input id="date-start"  type="date">
-            <p>Return</p> <input id="date-end"  type="date">
-            <button onclick="search()">Search</button>
+            <input id="from-input" type="text" placeholder="Where From?">
+            <input id="to-input" type="text" placeholder="Where To?">
+            <p>Departure</p> <input id="date-start" type="date">
+            <p>Return</p> <input id="date-end" type="date">
+            <button onclick="search()" class="btn waves-effect waves-light deep-purple lighten-3" type="submit" name="action">Search<i class="material-icons right">send</i></button>
         </div>
     </script>
 
   <script id="flights-template" type="text/x-handlebars-template">
           {{#each this}}
           <div id="flight-card">
-            <p>FROM:</p>
-            <p>{{cityFrom}}, {{countryFrom}}</p>
-            <br>
-            <p>TO:</p>
-            <p>{{cityTo}}, {{countryTo}}</p>
-            <br>
-            <p>DEPARTURE:</p>
-            <p>{{dTime}}</p>
-            <br>
-            <p>ARRIVAL:</p>
-            <p>{{aTime}}</p>
+            <p>FROM: {{cityFrom}}, {{countryFrom}}</p>
+            <p>TO: {{cityTo}}, {{countryTo}}</p>
+            <p>DEPARTURE: {{dTime}}</p>
+            <p>RETURN: {{aTime}}</p>
           </div>
           {{/each}}
     </script>
@@ -74,20 +71,14 @@
     </script>
 
   <script id="place-template" type="text/x-handlebars-template">
-    <div class="place-card">
-      <p>name :{{name}}</p>
-      <br>
-      <p>{{address}}</p>
-      <br>
-      <p>{{status}}</p>
-      <br>
+    <div id="place-card">
+      <p>Name: {{name}}</p>
+      <p>Address: {{address}}</p>
+      <p>Status: {{status}}</p>
       <p>{{internationalPhone}}</p>
-      <br>
-      <p>{{rating}}</p>
-      <br>
+      <p>Rating: {{rating}}</p>
       <p>{{website}}</p>
-      <br>
-      <img src="{{icon}}">
+      <img src="{{photos}}">
     </div>
     </script>
 
