@@ -98,8 +98,8 @@ $('.container').on('click', 'p.result-name', async function() {
 $('#comeHome').on('click',function(){
     $(".container").empty()
     $(".search-container").empty()
-    initialize()
     renderer.renderMainPage()
+    initializeAutocomplete()
 })
 
 $('#showChecklist').on('click', function(){
