@@ -37,6 +37,7 @@ const search = async () => {
     let flyFrom = ($("#from-input").val()).split(',')[0] || ''
     let flyTo = ($("#to-input").val()).split(',')[0] || ''
     currentCity = flyTo
+    renderer.renderWaiting()
     if(flyTo === '') {
         console.log('you gotta fly somewhere')
     } else {
