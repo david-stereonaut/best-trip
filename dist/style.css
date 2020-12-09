@@ -19,6 +19,16 @@ cursor: pointer;
   margin: 10px 10px;
 
 }
+
+/* #map-container {
+  display: none;
+} */
+
+#map {
+  width:500px;
+  height:380px;
+  display: none
+}
 .search-container{
   display: grid;
 }

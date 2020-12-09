@@ -1,13 +1,26 @@
 const placesManager = new PlacesManager()
 const flightsManager = new FlightsManager()
 const userManager = new UserManager()
+const mapManager = new MapManager()
 const renderer = new Renderer()
 
 /* on load actions */
 userManager.getPlaces()
-    // .then(function(result) {
-    //     renderer.renderFrontPage(result)
-    // })
+    .then(function(result) {
+        mapManager.initMap(result)
+    })
+
+const initializeAutocomplete = function() {
+    let options = {
+        types: ['(cities)']
+    }
+    
+    let fromInput = document.getElementById('from-input')
+    let toInput = document.getElementById('to-input')
+    
+    new google.maps.places.Autocomplete(fromInput, options)
+    new google.maps.places.Autocomplete(toInput, options)
+}
 
 let userLocation = {}
 let currentCity
@@ -20,18 +33,13 @@ let currentCategory
 //     userLocation = undefined
 // }
 renderer.renderMainPage()
+initializeAutocomplete()
 
-function initialize () {
-    let options = {
-        types: ['(cities)']
-    }
-    
-    let fromInput = document.getElementById('from-input')
-    let toInput = document.getElementById('to-input')
-
-    new google.maps.places.Autocomplete(fromInput, options)
-    new google.maps.places.Autocomplete(toInput, options)
-}
+$('#map-button').on('click', function(){
+    $(".container").empty()
+    $(".search-container").empty()
+    $("#map").css('display', 'block')
+})
 
 const search = async () => {
     let flyFrom = ($("#from-input").val()).split(',')[0] || ''
@@ -90,8 +98,8 @@ $('.container').on('click', 'p.result-name', async function() {
 $('#comeHome').on('click',function(){
     $(".container").empty()
     $(".search-container").empty()
-    initialize()
     renderer.renderMainPage()
+    initializeAutocomplete()
 })
 
 $('#showChecklist').on('click', function(){
