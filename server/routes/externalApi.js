@@ -1,5 +1,4 @@
 const express = require('express')
-const { get } = require('jquery')
 const router = express.Router()
 const axios = require('axios').default
 // const mongoose = require('mongoose')
@@ -51,7 +50,7 @@ router.get('/places/:city/:category', async function (req, res) {
     const category = req.params.category
     const makeCitytoLatandLong = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${cityName}&key=AIzaSyBZbfnMyK4xaIDNevsXwulDnxC9nhZ0rS0`)
     let location = makeCitytoLatandLong.data.results[0].geometry.location
-    const getPlaces = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.lat},${location.lng}&radius=5000&type=${category}&key=AIzaSyBZbfnMyK4xaIDNevsXwulDnxC9nhZ0rS0`)
+    const getPlaces = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.lat},${location.lng}&radius=5000&&language=entype=${category}&key=AIzaSyBZbfnMyK4xaIDNevsXwulDnxC9nhZ0rS0`)
     const results = getPlaces.data.results
     const places = results.filter(r => (!(r.types.includes('lodging')) & (!(r.types.includes('locality'))))).map(r => ({
         name: r.name,
@@ -66,7 +65,7 @@ router.get('/places/:city/:category', async function (req, res) {
 })
 router.get('/place/:placeID', async function (req, res) {
     const placeid = req.params.placeID
-    const getPlace = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyBZbfnMyK4xaIDNevsXwulDnxC9nhZ0rS0&place_id=${placeid}&langauge=en`)
+    const getPlace = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyBZbfnMyK4xaIDNevsXwulDnxC9nhZ0rS0&place_id=${placeid}&language=en`)
     const results = getPlace.data.result
     const place = 
     {

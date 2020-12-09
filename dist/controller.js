@@ -1,13 +1,13 @@
 const placesManager = new PlacesManager()
 const flightsManager = new FlightsManager()
-// const userManager = new UserManager()
+const userManager = new UserManager()
 const renderer = new Renderer()
 
 /* on load actions */
-// userManager.getChecklists()
-//     .then(function(result) {
-//         renderer.renderFrontPage(result)
-//     })
+userManager.getPlaces()
+    // .then(function(result) {
+    //     renderer.renderFrontPage(result)
+    // })
 
 let userLocation = {}
 let currentCity
@@ -48,25 +48,43 @@ const search = async () => {
     }
 }
 
+const checkIfListed = function(place_id, savedPlaces) {
+    return savedPlaces.some(p => p.place_id === place_id )
+}
+
 const searchPlaces = async (category) => {
     currentCategory = category
     console.log(category)
     let results = await placesManager.getPlaces(currentCity, category)
-    renderer.renderMoreResults(results)
+    let formattedResults = results.map(r => ({
+        ...r,
+        isListed: checkIfListed(r.place_id, userManager.places)
+    }))
+    console.log(formattedResults)
+    renderer.renderMoreResults(formattedResults)
 }
 
-// const saveToChecklist = (name) => {
-//     userManager.saveToChecklist(name, currentCategory)
-// }
+$('.container').on('click', 'button.save-to-db', async function ()  {
+    let place_id = $(this).closest("div").data('id')
+    userManager.saveToChecklist(place_id)
+    $(this).removeAttr("class")
+    $(this).attr("class", "remove-from-db")
+    $(this).html('remove')
+})
 
-// const removeFromChecklist = (name) => {
-//     userManager.removeFromChecklist(name)
-// }
+$('.container').on('click', 'button.remove-from-db', async function () {
+    let place_id = $(this).closest("div").data('id')
+    userManager.removeFromChecklist(place_id)
+    $(this).removeAttr("class")
+    $(this).attr("class", "save-to-db")
+    $(this).html('save')
+})
 
-const seePlace = async (placeid) => {
-    let place = await placesManager.getPlace(placeid)
-    renderer.renderPlace(place)
-}
+$('.container').on('click', 'p.result-name', async function() {
+        let place_id = $(this).closest("div").data('id')
+        let place = await placesManager.getPlace(place_id)
+        renderer.renderPlace({ ...place, isListed: checkIfListed(place_id, userManager.places) })
+})
 
 const seeChecklist = () => {
     renderer.renderChecklist(userManager.checklist)
