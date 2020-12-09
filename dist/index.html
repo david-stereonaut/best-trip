@@ -9,20 +9,21 @@
   <link type="text/css" rel="stylesheet" href="/materialize-css/dist/css/materialize.css" media="screen,projection" />
 
 
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Merienda&family=Sue+Ellen+Francisco&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Merienda&family=Sue+Ellen+Francisco&display=swap" rel="stylesheet">
   <title>BEST TRIP ORGANIZER</title>
 </head>
 
 <body>
-
+  
+  <div class="search-container"></div>
   <div class="container">
   </div>
-
+  
   <script id="main-page-template" type="text/x-handlebars-template">
-        <h1 class="center-align">YOUR BEST TRIP ORGANIZER</h1>
-        <h3 class="center-align">Fly Your Mind...</h3>
-        <div class="search-container">
+    <div class="search-body">
+      <h1 class="center-align">YOUR BEST TRIP ORGANIZER</h1>
+      <h3 class="center-align">Fly Your Mind...</h3>
             <input id="from-input" type="text" placeholder="Where From?">
             <input id="to-input" type="text" placeholder="Where To?">
             <p>Departure</p> <input id="date-start" type="date">
@@ -41,7 +42,7 @@
             <p>duration: {{fly_duration}}</p>
             <p>DEPARTURE:</p>
             <p>{{dTime}}</p>
-            <p>ARRIVAL:</p>
+            <p>RETURN:</p>
             <p>{{aTime}}</p>
             <P>price: {{price}}</P>
             <p>availability seats: {{availability}}</p>
