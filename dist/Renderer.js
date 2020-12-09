@@ -46,4 +46,12 @@ class Renderer {
     const placeHtml = template(place)
     $('.results-container').append(placeHtml)
     }
+
+    renderWaiting(){
+        $(".container").empty()
+        const source = $('#waiting-template').html()
+        const template = Handlebars.compile(source)
+        const waitHtml = template()
+        $('.container').append(waitHtml)
+    }
 }
