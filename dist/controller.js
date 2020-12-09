@@ -12,26 +12,20 @@ userManager.getPlaces()
 let userLocation = {}
 let currentCity
 let currentCategory
-// if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition(async function(position) {
-//         userLocation = { lat: position.coords.latitude, lon: position.coords.longitude }
-//     });
-// } else {
-//     userLocation = undefined
-// }
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(async function(position) {
+        userLocation = { lat: position.coords.latitude, lon: position.coords.longitude }
+    });
+} else {
+    userLocation = undefined
+}
 renderer.renderMainPage()
 
-function initialize () {
-    let options = {
-        types: ['(cities)']
-    }
-    
-    let fromInput = document.getElementById('from-input')
-    let toInput = document.getElementById('to-input')
-
-    new google.maps.places.Autocomplete(fromInput, options)
-    new google.maps.places.Autocomplete(toInput, options)
-}
+$('#map-button').on('click', function(){
+    $(".container").empty()
+    $(".search-container").empty()
+    $("#map").css('display', 'block')
+})
 
 const search = async () => {
     let flyFrom = ($("#from-input").val()).split(',')[0] || ''

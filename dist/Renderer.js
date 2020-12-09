@@ -55,4 +55,13 @@ class Renderer {
         const waitHtml = template()
         $('.container').append(waitHtml)
     }
+
+    renderMap(){
+        $(".container").empty()
+        $(".search-container").empty()
+        const source = $('#map-page-template').html()
+        const template = Handlebars.compile(source)
+        const mapsHtml = template()
+        $('.container').append(mapsHtml)
+    }
 }

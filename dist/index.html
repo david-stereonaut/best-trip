@@ -15,10 +15,13 @@
 </head>
 
 <body>
-  
+  <div id="map"></div>
+  <button id="map-button">Load The Map</button>
   <div class="search-container"></div>
   <div class="container">
+    
   </div>
+
   
   <script id="main-page-template" type="text/x-handlebars-template">
     <div class="search-body">
@@ -134,8 +137,9 @@
     </script>
   <script src="/jquery/dist/jquery.js"></script>
   <script src="/handlebars/dist/handlebars.js"></script>
-  <script defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZbfnMyK4xaIDNevsXwulDnxC9nhZ0rS0&language=en&libraries=places&callback=initialize">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZbfnMyK4xaIDNevsXwulDnxC9nhZ0rS0&language=en&libraries=places">
     </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.js"
     integrity="sha512-z8IfZLl5ZASsWvr1syw5rkpo2HKBexjwzYDaUkIfoWo0aEqL/MgGKniDouh5DmsD9YrisbM+pihyCKIHL9VucQ=="
@@ -145,6 +149,7 @@
   <script src="PlacesManager.js"></script>
   <script src="UserManager.js"></script>
   <script src="controller.js"></script>
+  <script src="googleServices.js"></script>
   <script type="text/javascript" src="/materialize-css/dist/js/materialize.js"></script>
 </body>
 

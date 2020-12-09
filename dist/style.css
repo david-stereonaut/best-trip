@@ -2,6 +2,16 @@
   display: grid;
   grid-template-columns: 1fr 3fr ;
 }
+
+/* #map-container {
+  display: none;
+} */
+
+#map {
+  width:500px;
+  height:380px;
+  display: none
+}
 .search-container{
   display: grid;
 }
