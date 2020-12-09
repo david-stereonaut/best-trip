@@ -44,15 +44,23 @@ router.post('/flights', async function (req, res) {
     res.send(flightsArray)
 })
 
+// router.get('/placeLocation/:place', function (req, res) {
+//     const makeCitytoLatandLong = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${req.params.place}&key=AIzaSyBZbfnMyK4xaIDNevsXwulDnxC9nhZ0rS0`)
+
+//     res.send({
+        
+//     })
+// })
+
 
 router.get('/places/:city/:category', async function (req, res) {
     const cityName = req.params.city
     const category = req.params.category
     const makeCitytoLatandLong = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${cityName}&key=AIzaSyBZbfnMyK4xaIDNevsXwulDnxC9nhZ0rS0`)
     let location = makeCitytoLatandLong.data.results[0].geometry.location
-    const getPlaces = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.lat},${location.lng}&radius=5000&&language=entype=${category}&key=AIzaSyBZbfnMyK4xaIDNevsXwulDnxC9nhZ0rS0`)
+    const getPlaces = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.lat},${location.lng}&radius=10000&&language=entype=${category}&key=AIzaSyBZbfnMyK4xaIDNevsXwulDnxC9nhZ0rS0`)
     const results = getPlaces.data.results
-    const places = results.filter(r => (!(r.types.includes('lodging')) & (!(r.types.includes('locality'))))).map(r => ({
+    const places = results.map(r => ({
         name: r.name,
         icon: r.icon,
         types: r.types,
