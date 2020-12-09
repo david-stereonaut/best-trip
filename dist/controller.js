@@ -74,7 +74,9 @@ const searchPlaces = async (category) => {
 
 $('.container').on('click', 'button.save-to-db', async function ()  {
     let place_id = $(this).closest("div").data('id')
-    userManager.saveToChecklist(place_id)
+    let category = $(this).closest("div").data('category')
+    console.log(category)
+    userManager.saveToChecklist(place_id, category)
     $(this).removeAttr("class")
     $(this).attr("class", "remove-from-db")
     $(this).html('remove')
@@ -91,8 +93,9 @@ $('.container').on('click', 'button.remove-from-db', function () {
 
 $('.container').on('click', 'p.result-name', async function() {
         let place_id = $(this).closest("div").data('id')
+        let category = $(this).closest("div").data('category')
         let place = await placesManager.getPlace(place_id)
-        renderer.renderPlace({ ...place, isListed: checkIfListed(place_id, userManager.places) })
+        renderer.renderPlace({ ...place, isListed: checkIfListed(place_id, userManager.places), category })
 })
 
 $('#comeHome').on('click',function(){

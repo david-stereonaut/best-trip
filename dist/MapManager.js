@@ -5,9 +5,17 @@ class MapManager {
     }
 
     initMap(checklistArray) {
-        let firstPlaceLatLng = {
-            lat: checklistArray[0].geometry.location.lat ? checklistArray[0].geometry.location.lat : -34.397,
-            lng:  checklistArray[0].geometry.location.lng ?  checklistArray[0].geometry.location.lng : 150.644
+        let firstPlaceLatLng
+        if (checklistArray[0]){
+            firstPlaceLatLng = {
+                lat: checklistArray[0].geometry.location.lat,
+                lng:  checklistArray[0].geometry.location.lng
+            }
+        } else {
+            firstPlaceLatLng = {
+                lat: -34.397,
+                lng: 150.644
+            }
         }
 
         this.map = new google.maps.Map(document.getElementById("map"), {

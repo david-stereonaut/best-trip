@@ -81,7 +81,7 @@
 
   <script id="more-results-template" type="text/x-handlebars-template">
         {{#each this}}
-  <div class="result-card"  data-id="{{place_id}}">
+  <div class="result-card" data-id="{{place_id}}" data-category="{{category}}">
             <img src="{{icon}}">
             <p class='result-name'>{{name}}</p>
             <p>rating: {{rating}}</p>
@@ -108,7 +108,7 @@
 
   <script id="place-template" type="text/x-handlebars-template">
 
-    <div class="place-card" data-id='{{place_id}}'>
+    <div class="place-card" data-id='{{place_id}}' data-category="{{category}}">
       <img src="{{icon}}">
       <p>{{name}}</p>
       <p>Address: {{address}}</p>
@@ -141,7 +141,7 @@
   <script id="checklist-template" type="text/x-handlebars-template">
     <div class="checklist-container">
     {{#each this}}
-<div class="result-card"  data-id="{{place_id}}">
+<div class="result-card"  data-id="{{place_id}}" data-category="{{category}}">
         <img src="{{icon}}">
         <p class='result-name'>{{name}}</p>
         <p>rating: {{rating}}</p>

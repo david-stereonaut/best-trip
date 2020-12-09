@@ -6,7 +6,12 @@ class PlacesManager {
 
     async getPlaces(searchString, category) {
         let places = await $.get(`/places/${searchString}/${category}`, {})
-        this.results = places
+        console.log(category)
+        let formattedPlaces = places.map(r => ({
+            ...r,
+            category
+        }))
+        this.results = formattedPlaces
         return this.results
     }
 

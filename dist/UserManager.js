@@ -9,9 +9,9 @@ class UserManager {
     return this.places
   }
 
-  async saveToChecklist(place_id) {
+  async saveToChecklist(place_id, category) {
     if (!(this.places.some(p => p.place_id === place_id))){
-      let place = await $.post(`/savePlace/${place_id}`)
+      let place = await $.post(`/savePlace/${place_id}/${category}`)
       this.places.push(place)
     }
   }

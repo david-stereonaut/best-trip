@@ -15,8 +15,9 @@ router.get('/getPlaces', async function(req, res) {
     res.send(formattedPlaces)
 })
 
-router.post('/savePlace/:place_id', async function(req, res) {
+router.post('/savePlace/:place_id/:category', async function(req, res) {
     let place_id = req.params.place_id
+    let category = req.params.category
     const getPlace = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyBZbfnMyK4xaIDNevsXwulDnxC9nhZ0rS0&place_id=${place_id}&langauge=en`)
     const result = getPlace.data.result
     const place = {
@@ -34,7 +35,8 @@ router.post('/savePlace/:place_id', async function(req, res) {
         opening_hours:result.opening_hours||null,
         googleurl:result.url,
         types:result.types,
-        vicinity:result.vicinity
+        vicinity:result.vicinity,
+        category
     }
     new Place(place).save().then(function(newPlace) {
         res.send(newPlace)

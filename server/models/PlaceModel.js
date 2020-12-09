@@ -16,7 +16,8 @@ const placeSchema = new Schema({
     reviews: Array,
     types: Array,
     url: String,
-    vicinity: String
+    vicinity: String,
+    category: String
 })
 
 const Place = mongoose.model("Place", placeSchema)
