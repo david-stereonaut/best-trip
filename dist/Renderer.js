@@ -9,10 +9,14 @@ class Renderer {
 
     renderFlights(flights) {
         $('.flights-container').empty()
-        const source = $('#flights-template').html()
-        const template = Handlebars.compile(source)
-        const flightsHtml = template(flights)
-        $('.flights-container').append(flightsHtml)
+        if (flights.error || flights.length == 0){
+            $('.flights-container').append(`<p>no flights found</p>`)
+        } else {
+            const source = $('#flights-template').html()
+            const template = Handlebars.compile(source)
+            const flightsHtml = template(flights)
+            $('.flights-container').append(flightsHtml)
+        }
     }
 
     renderResults() {
