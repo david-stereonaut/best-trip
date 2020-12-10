@@ -9,7 +9,7 @@ userManager.getPlaces()
     .then(function(result) {
         mapManager.initMap(result)
     })
-
+userManager.getChecklists()
 const initializeAutocomplete = function() {
     let options = {
         types: ['(cities)']
@@ -38,6 +38,7 @@ initializeAutocomplete()
 $('#map-button').on('click', function(){
     $(".container").empty()
     $(".search-container").empty()
+    mapManager.populateMap(userManager.places)
     $("#map").css('display', 'block')
 })
 
@@ -68,7 +69,6 @@ const searchPlaces = async (category) => {
         ...r,
         isListed: checkIfListed(r.place_id, userManager.places)
     }))
-    console.log(formattedResults)
     renderer.renderMoreResults(formattedResults)
 }
 
@@ -100,6 +100,7 @@ $('.container').on('click', 'p.result-name', async function() {
 $('#comeHome').on('click',function(){
     $("#map").css('display', 'none')
     $(".container").empty()
+    mapManager.clearMarkers()
     $(".search-container").empty()
     renderer.renderMainPage()
     initializeAutocomplete()
@@ -107,6 +108,7 @@ $('#comeHome').on('click',function(){
 
 $('#showChecklist').on('click', function(){
     $("#map").css('display', 'none')
+    mapManager.clearMarkers()
     renderer.renderChecklist(userManager.places)
 })
 

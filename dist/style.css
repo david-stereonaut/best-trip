@@ -12,6 +12,11 @@
   cursor: pointer;
   
 }
+
+#map-button {
+  cursor: pointer
+}
+
 .waitingPic{
 border-radius: 50%;
 }
@@ -31,8 +36,9 @@ border-radius: 50%;
 } */
 
 #map {
-  width:500px;
-  height:380px;
+  margin-left:12.5vw;
+  width:75vw;
+  height:75vh;
   display: none
 }
 .search-container{

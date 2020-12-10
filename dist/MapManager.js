@@ -49,13 +49,22 @@ class MapManager {
                 this.handleLocationError(false, infoWindow, map.getCenter())
             }
         })
+    }
+
+    populateMap(checklistArray) {
         if (checklistArray && checklistArray.length > 0) {
+            let randomIndex = Math.floor(Math.random() * checklistArray.length)
+            let randomPlace = {
+                lat: checklistArray[randomIndex].geometry.location.lat,
+                lng:  checklistArray[randomIndex].geometry.location.lng 
+            }
+            this.map.setCenter(randomPlace)
             checklistArray.forEach(p => {
-                let PlaceLatLng = {
+                let placeLatLng = {
                     lat: p.geometry.location.lat,
                     lng:  p.geometry.location.lng 
                 }
-                this.addMarker(PlaceLatLng)
+                this.addMarker(placeLatLng)
             })
         }
     }
@@ -79,7 +88,7 @@ class MapManager {
     }
 
     clearMarkers() {
-        setMapOnAll(null);
+        this.markers.length = 0
     }
     
     showMarkers() {
