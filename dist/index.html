@@ -82,17 +82,11 @@
 
   <script id="more-results-template" type="text/x-handlebars-template">
         {{#each this}}
-<<<<<<< HEAD
-  <div class="result-card" data-id="{{place_id}}" data-category="{{category}}">
-            <img src="{{icon}}">
-            <p class='result-name'>{{name}}</p>
-=======
-  <div class="result-card"  data-id="{{place_id}}">
+  <div class="result-card"  data-id="{{place_id}}"  data-category="{{category}}">
     <img src="{{icon}}" class='icon'>
     <p class='result-name'>{{name}}</p>
     <div class="resultText">
     {{#if rating}}          
->>>>>>> main
             <p>rating: {{rating}}</p>
             {{/if}}
             {{#if opening_hours.open_now}}
@@ -152,12 +146,8 @@
   <script id="checklist-template" type="text/x-handlebars-template">
     <div class="checklist-container">
     {{#each this}}
-<<<<<<< HEAD
-<div class="result-card"  data-id="{{place_id}}" data-category="{{category}}">
-=======
-<div class="checklist-card"  data-id="{{place_id}}">
+<div class="checklist-card"  data-id="{{place_id}}"  data-category="{{category}}">
        <div class="checklistText">
->>>>>>> main
         <img src="{{icon}}">
         <p>
           {{name}}<br>
