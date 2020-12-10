@@ -53,7 +53,7 @@ router.post('/savePlace/:place_id/:category/:checklistId', async function(req, r
     // })
 })
 
-router.delete('/removePlace/:place_id', function(req, res) {
+router.delete('/removePlace/:place_id/:checklistId', function(req, res) {
     let place_id = req.params.place_id
     Place.findOneAndDelete({ place_id }, { useFindAndModify: false }).then(
         res.send({success: "deleted"})

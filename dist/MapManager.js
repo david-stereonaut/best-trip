@@ -88,6 +88,7 @@ class MapManager {
     }
 
     clearMarkers() {
+        this.markers.forEach(m => m.setMap(null))
         this.markers.length = 0
     }
     

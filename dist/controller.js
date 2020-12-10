@@ -9,8 +9,13 @@ userManager.getPlaces()
     .then(function(result) {
         mapManager.initMap(result)
     })
+
 userManager.getChecklists()
-const initializeAutocomplete = function() {
+    .then(function(results) {
+        renderer.renderDropdown(results)
+    })
+
+    const initializeAutocomplete = function() {
     let options = {
         types: ['(cities)']
     }
@@ -38,7 +43,8 @@ initializeAutocomplete()
 $('#map-button').on('click', function(){
     $(".container").empty()
     $(".search-container").empty()
-    mapManager.populateMap(userManager.places)
+    userManager.getChecklists().then
+    mapManager.populateMap(userManager.currentChecklist.places)
     $("#map").css('display', 'block')
 })
 
@@ -67,7 +73,7 @@ const searchPlaces = async (category) => {
     let results = await placesManager.getPlaces(currentCity, category)
     let formattedResults = results.map(r => ({
         ...r,
-        isListed: checkIfListed(r.place_id, userManager.places)
+        isListed: checkIfListed(r.place_id, userManager.currentChecklist.places)
     }))
     renderer.renderMoreResults(formattedResults)
 }
@@ -76,6 +82,9 @@ $('div').on('click', 'button.save-to-db', async function ()  {
     let place_id = $(this).closest("div").data('id')
     let category = $(this).closest("div").data('category')
     userManager.saveToChecklist(place_id, category)
+    let newChecklists = await userManager.getChecklists()
+    let newCurrent = newChecklists.find(n => n._id === userManager.currentChecklist._id)
+    userManager.currentChecklist = newCurrent
     $(this).removeAttr("class")
     $(this).attr("class", "remove-from-db")
     $(this).html('remove')
@@ -84,7 +93,8 @@ $('div').on('click', 'button.save-to-db', async function ()  {
 $('div').on('click', 'button.remove-from-db', function () {
     console.log('boom')
     let place_id = $(this).closest("div").data('id')
-    userManager.removeFromChecklist(place_id)
+    let checklistId = userManager.currentChecklist.__id
+    userManager.removeFromChecklist(place_id, checklistId)
     $(this).removeAttr("class")
     $(this).attr("class", "save-to-db")
     $(this).html('save')
@@ -94,7 +104,7 @@ $('.container').on('click', 'p.result-name', async function() {
         let place_id = $(this).closest("div").data('id')
         let category = $(this).closest("div").data('category')
         let place = await placesManager.getPlace(place_id)
-        renderer.renderPlace({ ...place, isListed: checkIfListed(place_id, userManager.places), category })
+        renderer.renderPlace({ ...place, isListed: checkIfListed(place_id, userManager.currentChecklist.places), category })
 })
 
 $('#comeHome').on('click',function(){
@@ -109,9 +119,25 @@ $('#comeHome').on('click',function(){
 $('#showChecklist').on('click', function(){
     $("#map").css('display', 'none')
     mapManager.clearMarkers()
-    renderer.renderChecklist(userManager.places)
+    renderer.renderChecklist(userManager.currentChecklist.places)
 })
 
 const seeChecklist = () => {
-    renderer.renderChecklist(userManager.checklist)
+    renderer.renderChecklist(userManager.currentChecklist.places)
+}
+
+$('#new-checklist').on('click', async function(){
+    let name = $(this).siblings("input").val()
+    $(this).siblings("input").val('')
+    userManager.newChecklist(name).then(function(result){
+        $(".loaded-checklist").remove()
+        renderer.renderDropdown(result)
+        $("#current-checklist").html(`${name}`)
+    })
+
+})
+
+const makeCurrentChecklist = function(checklistId){
+    let newChecklist = userManager.makeCurrentChecklist(checklistId)
+    $("#current-checklist").html(`${newChecklist.name}`)
 }
