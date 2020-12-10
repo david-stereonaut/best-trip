@@ -5,9 +5,17 @@ class MapManager {
     }
 
     initMap(checklistArray) {
-        let firstPlaceLatLng = {
-            lat: checklistArray[0].geometry.location.lat ? checklistArray[0].geometry.location.lat : -34.397,
-            lng:  checklistArray[0].geometry.location.lng ?  checklistArray[0].geometry.location.lng : 150.644
+        let firstPlaceLatLng
+        if (checklistArray[0]){
+            firstPlaceLatLng = {
+                lat: checklistArray[0].geometry.location.lat,
+                lng:  checklistArray[0].geometry.location.lng
+            }
+        } else {
+            firstPlaceLatLng = {
+                lat: -34.397,
+                lng: 150.644
+            }
         }
 
         this.map = new google.maps.Map(document.getElementById("map"), {
@@ -41,13 +49,22 @@ class MapManager {
                 this.handleLocationError(false, infoWindow, map.getCenter())
             }
         })
+    }
+
+    populateMap(checklistArray) {
         if (checklistArray && checklistArray.length > 0) {
+            let randomIndex = Math.floor(Math.random() * checklistArray.length)
+            let randomPlace = {
+                lat: checklistArray[randomIndex].geometry.location.lat,
+                lng:  checklistArray[randomIndex].geometry.location.lng 
+            }
+            this.map.setCenter(randomPlace)
             checklistArray.forEach(p => {
-                let PlaceLatLng = {
+                let placeLatLng = {
                     lat: p.geometry.location.lat,
                     lng:  p.geometry.location.lng 
                 }
-                this.addMarker(PlaceLatLng)
+                this.addMarker(placeLatLng)
             })
         }
     }
@@ -71,7 +88,8 @@ class MapManager {
     }
 
     clearMarkers() {
-        setMapOnAll(null);
+        this.markers.forEach(m => m.setMap(null))
+        this.markers.length = 0
     }
     
     showMarkers() {

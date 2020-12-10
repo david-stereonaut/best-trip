@@ -78,4 +78,11 @@ class Renderer {
         const checklistHtml = template(checklist)
         $('.search-container').append(checklistHtml)
     }
+
+    renderDropdown(checklists) {
+        $("#current-checklist").html(`${checklists[0].name}`)
+        checklists.forEach(c => {
+            $("#dropdown").prepend(`<p class="loaded-checklist" onclick="makeCurrentChecklist('${c._id}')">${c.name}</p>`)
+        })
+    }
 }

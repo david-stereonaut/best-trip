@@ -20,10 +20,16 @@
 
   <div id="panel">
   <i class="fas fa-home" id="comeHome"></i>
-  <i class="fas fa-user-alt" id="showChecklist"></i>
+  <i class="fas fa-user-alt dropbtn" id="showChecklist"></i>
+  <i class="fas fa-globe-americas" id="map-button"></i>
+
+    <span id="current-checklist">Default Checklist</span>
+    <div id="dropdown">
+      <input placeholder="Create New Checklist"><button id="new-checklist">create</button>
+    </div>
+
   </div>
   <div id="map"></div>
-  <button id="map-button">Load The Map</button>
   <div class="search-container"></div>
   <div class="container"></div>
 
@@ -82,7 +88,7 @@
 
   <script id="more-results-template" type="text/x-handlebars-template">
         {{#each this}}
-  <div class="result-card"  data-id="{{place_id}}">
+  <div class="result-card"  data-id="{{place_id}}"  data-category="{{category}}">
     <img src="{{icon}}" class='icon'>
     <p class='result-name'>{{name}}</p>
     <div class="resultText">
@@ -110,7 +116,7 @@
       
   <script id="place-template" type="text/x-handlebars-template">
 
-    <div class="place-card" data-id='{{place_id}}'>
+    <div class="place-card" data-id='{{place_id}}' data-category="{{category}}">
       <img src="{{icon}}">
       <p>
         {{name}}<br>
@@ -146,7 +152,7 @@
   <script id="checklist-template" type="text/x-handlebars-template">
     <div class="checklist-container">
     {{#each this}}
-<div class="checklist-card"  data-id="{{place_id}}">
+<div class="checklist-card"  data-id="{{place_id}}"  data-category="{{category}}">
        <div class="checklistText">
         <img src="{{icon}}">
         <p>

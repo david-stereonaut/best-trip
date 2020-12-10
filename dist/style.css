@@ -1,5 +1,5 @@
 #panel{
-  display: list-item;
+  /* display: list-item; */
   height: 40px;
   background-color: rgb(191, 191, 235,0.8);
 }
@@ -12,12 +12,53 @@
   cursor: pointer;
   
 }
+
+#dropdown {
+  display:none;
+  position: absolute;
+  left: 100px;
+  top: 40px;
+  background-color: #d8f3dc;
+  max-width: 20vh;
+  min-width: 15vh;
+}
+
+
+#dropdown p:hover {background-color: #74c69d;}
+
+#dropdown:hover {
+  display:grid;
+}
+
+#dropdown p {
+  color: black;
+  margin: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  font-family: 'Nunito', sans-serif;
+}
+
+#current-checklist:hover + #dropdown  {
+  display:grid;
+}
+
+#panel:hover #dropdown  {
+  display:grid;
+}
+
+#map-button {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
 .waitingPic{
 border-radius: 50%;
 }
 
 .form{
   background-color: rgb(236, 240, 241,0.7);
+  border-radius: 5px;
 }
 .container{
   display: grid;
@@ -31,8 +72,9 @@ border-radius: 50%;
 } */
 
 #map {
-  width:500px;
-  height:380px;
+  margin-left:12.5vw;
+  width:75vw;
+  height:75vh;
   display: none
 }
 .search-container{
