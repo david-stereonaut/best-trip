@@ -99,6 +99,7 @@ $('.container').on('click', 'p.result-name', async function() {
 })
 
 $('#comeHome').on('click',function(){
+    $("#map").css('display', 'none')
     $(".container").empty()
     $(".search-container").empty()
     renderer.renderMainPage()
@@ -106,6 +107,7 @@ $('#comeHome').on('click',function(){
 })
 
 $('#showChecklist').on('click', function(){
+    $("#map").css('display', 'none')
     renderer.renderChecklist(userManager.places)
 })
 
