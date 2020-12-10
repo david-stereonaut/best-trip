@@ -81,9 +81,11 @@ const searchPlaces = async (category) => {
 $('div').on('click', 'button.save-to-db', async function ()  {
     let place_id = $(this).closest("div").data('id')
     let category = $(this).closest("div").data('category')
+    let currentId = userManager.currentChecklist._id
     userManager.saveToChecklist(place_id, category)
     let newChecklists = await userManager.getChecklists()
-    let newCurrent = newChecklists.find(n => n._id === userManager.currentChecklist._id)
+    console.log(newChecklists)
+    let newCurrent = newChecklists.find(n => n._id === currentId)
     userManager.currentChecklist = newCurrent
     $(this).removeAttr("class")
     $(this).attr("class", "remove-from-db")
