@@ -72,17 +72,16 @@ const searchPlaces = async (category) => {
     renderer.renderMoreResults(formattedResults)
 }
 
-$('.container').on('click', 'button.save-to-db', async function ()  {
+$('div').on('click', 'button.save-to-db', async function ()  {
     let place_id = $(this).closest("div").data('id')
     let category = $(this).closest("div").data('category')
-    console.log(category)
     userManager.saveToChecklist(place_id, category)
     $(this).removeAttr("class")
     $(this).attr("class", "remove-from-db")
     $(this).html('remove')
 })
 
-$('.container').on('click', 'button.remove-from-db', function () {
+$('div').on('click', 'button.remove-from-db', function () {
     console.log('boom')
     let place_id = $(this).closest("div").data('id')
     userManager.removeFromChecklist(place_id)

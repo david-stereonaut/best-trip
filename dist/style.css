@@ -1,23 +1,29 @@
 #panel{
   display: list-item;
   height: 40px;
-  background-color: rgb(191, 191, 235);
+  background-color: rgb(191, 191, 235,0.8);
 }
 #comeHome{
   margin: 15px 10px ;
   cursor: pointer;
 }
 #showChecklist{
-margin: 15px 30px;
-cursor: pointer;
-
+  margin: 15px 30px;
+  cursor: pointer;
+  
+}
+.waitingPic{
+border-radius: 50%;
 }
 
+.form{
+  background-color: rgb(236, 240, 241,0.7);
+}
 .container{
   display: grid;
   grid-template-columns: 1fr 3fr ;
   margin: 10px 10px;
-
+  
 }
 
 /* #map-container {
@@ -38,34 +44,151 @@ cursor: pointer;
   width: 50vw;
   align-content: center;
 }
-.flights-container , #flight-card , #place-card{
+.flights-container {
     display: grid;
     justify-content: center; 
-    background-color: #ecf0f1;
+    background-color:  rgb(236, 240, 241,0.5);
     height:500px;
 		width:300px;
     overflow-y:auto
+  }
+  #flight-card{
+  background-color:  rgb(236, 240, 241,0.7) ;
+  margin-top: 5px;
+  float: inherit;
+  border: solid wheat 0.8px;
+  
 }
-
 .results-container{
+  background-color: rgb(236, 240, 241,0.7);
+  height:500px;
+  width:800px;
+  overflow-y:auto 
+}
+.result-card{
+  position: relative;
   display: grid;
+  grid-template-columns: 3fr 3fr 1fr;
   justify-content: center; 
-  background-color: #ecf0f1;
-  height:800px;
-  width:400px;
-  overflow-y:auto
-}
-.form{
-  background-color: #ecf0f1;
-
-}
-:placeholder-shown{
-  color: black;
+  background-color:  rgb(236, 240, 241,0.7) ;
+  height: 250px;
+  margin: 5px 5px;
+  border: solid wheat 0.8px;
 }
 
-.restaurants , .nightlife , .museums , .parks , .result-card{
-  justify-content: center; 
+.icon{
+  position: absolute;
+  margin: 3px 5px;
+  width: 30px ;
+  height: 40px;
 }
+.result-name{
+  position: absolute;
+  margin-left: 60px;
+  width: 100px
+  
+}
+.resultText{
+  position: absolute;
+  margin-top: 60px;
+  width: 100px;
+  cursor: pointer;
+}
+
+ .resultImg{
+  position: absolute;
+  margin-left: 280px;
+  width: 100px
+} 
+   
+.restaurants{
+  height: 200px;
+  width: 100%;
+  color: aliceblue;
+  background-image: url("https://food-concept.pl/wp-content/uploads/2017/10/health-food-2.jpg") ;
+  background-size: cover;
+  background-position: 50% 50%;
+  cursor: pointer;
+} 
+.nightlife{
+  height: 200px;
+  width: 100%;
+  background-image: url("https://img.traveltriangle.com/blog/wp-content/uploads/2019/01/cover30.jpeg") ;
+  color: aliceblue;
+  background-size: cover;
+  background-position: 50% 50%;
+  cursor: pointer;
+
+}
+.museums{
+  height: 200px;
+  width: 100%;
+  color: aliceblue;
+  background-image: url("https://i2.wp.com/hyperallergic.com/wp-content/uploads/2020/03/HOMEo-1536x960-1.jpg?fit=1000%2C618&quality=100&ssl=1") ;
+  background-size: cover;
+  background-position: 50% 50%;
+  cursor: pointer;
+
+}
+.parks{
+  height: 200px;
+  width: 100%;
+  color: aliceblue;
+  background-image: url("https://static01.nyt.com/images/2019/11/03/travel/00footsteps-olmsted1/merlin_161566521_4d72ba34-770d-4835-9095-710c24a11877-superJumbo.jpg") ;
+  background-size: cover;
+  background-position: 50% 50%;
+  cursor: pointer;
+
+}
+
+#place-card{
+  position: relative;
+  justify-content: center; 
+  background-color:  rgb(236, 240, 241,0.7) ;
+}
+.placeImgs{
+display: inline-block;
+}
+.placePic{
+  float: left;
+}
+.placeReviews{
+  overflow-y:auto 
+}
+.review-card{
+ border: solid 0.8px black; 
+}
+.checklist-container{
+  width: 100%;
+}
+.checklist-card{
+  justify-content: center; 
+  display: grid;
+  grid-template-columns: 3fr 3fr 1fr;
+  background-color:  rgb(236, 240, 241,0.7) ;
+  height: 300px;
+  width: 100%;
+  margin: 5px 5px;
+  border: solid wheat 0.8px;
+}
+.checklistImg{
+position: relative;
+width: 300px;
+height: 250px;
+margin: 10px 200px;
+}
+.checkPic{
+  position: absolute;
+}
+.remove-from-db{
+  justify-self: center;
+  align-self: center;
+}
+.save-to-db{
+  justify-self: center;
+  align-self: center;
+}
+
 
 h3{
   font-family: 'Pacifico', cursive;
